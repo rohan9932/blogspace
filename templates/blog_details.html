@@ -1,0 +1,54 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}{{ post.title }}{% endblock title %}
+
+{% block navbar %}
+<nav class="navbar">
+    <div class="nav-left">
+        <a href="{% url 'homepage' %}" class="logo">
+            <span class="logo-icon">✦</span>
+            <span class="logo-text">BlogNest</span>
+        </a>
+    </div>
+    <div class="nav-right">
+        {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}" class="nav-link">Profile</a>
+            <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="nav-link">Login</a>
+        {% endif %}
+    </div>
+</nav>
+{% endblock navbar %}
+
+{% block main %}
+<section class="page-section">
+    <div class="details-card">
+        <h1 class="details-title">{{ post.title }}</h1>
+        <p class="details-content">{{ post.content }}</p>
+        <p class="details-author">By {{ post.author.username }}</p>
+
+        <div class="comments-section">
+            <h3>Comments</h3>
+
+            <form method="POST" class="comment-form">
+                {% csrf_token %}
+                <input type="text" name="comment" placeholder="Write a comment..." class="comment-input" required>
+                <button type="submit" class="card-btn">Post Comment</button>
+            </form>
+
+            <div class="comment-list">
+                {% for comment in comments %}
+                    <div class="comment-item">
+                        <p>{{ comment.text }}</p>
+                        <small>— {{ comment.user.username }}</small>
+                    </div>
+                {% empty %}
+                    <p class="no-comments">No comments yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock main %}

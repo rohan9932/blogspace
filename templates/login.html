@@ -1,0 +1,24 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Login{% endblock title %}Login
+
+{% block main %}
+<section class="auth-wrapper">
+    <div class="auth-card">
+        <h2 class="auth-title">Login</h2>
+
+        <form method="POST" class="auth-form">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" class="auth-input" required>
+            <input type="password" name="password" placeholder="Password" class="auth-input" required>
+            <button type="submit" class="auth-btn">Login</button>
+        </form>
+
+        <p class="auth-switch">
+            Don’t have an account?
+            <a href="{% url 'register' %}">Register</a>
+        </p>
+    </div>
+</section>
+{% endblock main %}

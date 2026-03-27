@@ -1,0 +1,30 @@
+{% extends "blog/blog.html" %}
+{% load static %}
+
+{% block title %}BlogSpace{% endblock title %}BlogPosts
+
+{% block navbar %}
+<nav class="navbar">
+    <div class="nav-left">
+        <a href="{% url 'homepage' %}" class="logo">
+            <span class="logo-icon">✦</span>
+            <span class="logo-text">BlogSpace</span>
+        </a>
+    </div>
+    <div class="nav-right">
+        {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}" class="nav-link">Profile</a>
+            <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="nav-link">Login</a>
+        {% endif %}
+    </div>
+</nav>
+{% endblock navbar %}
+
+{% block main %}
+<main class="hero-center">
+    <h1 class="hero-title">BlogSpace</h1>
+    <p class="hero-subtitle">Your blogs in one place.</p>
+</main>
+{% endblock main %}

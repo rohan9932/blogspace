@@ -1,0 +1,53 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Profile{% endblock title %}Profile
+
+{% block navbar %}
+<nav class="navbar">
+    <div class="nav-left">
+        <a href="{% url 'homepage' %}" class="logo">
+            <span class="logo-icon">✦</span>
+            <span class="logo-text">BlogNest</span>
+        </a>
+    </div>
+    <div class="nav-right">
+        {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}" class="nav-link">Profile</a>
+            <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="nav-link">Login</a>
+        {% endif %}
+    </div>
+</nav>
+{% endblock navbar %}
+
+{% block main %}
+<section class="page-section">
+    <div class="section-header section-header-space">
+        <h2>My Blogs</h2>
+        <a href="{% url 'add_post' %}" class="add-btn">Add</a>
+    </div>
+
+    {% if user_posts %}
+    <div class="card-grid">
+        {% for post in user_posts %}
+        <div class="blog-card">
+            <h3 class="card-title">{{ post.title }}</h3>
+            <p class="card-content">{{ post.content|truncatewords:40 }}</p>
+            <p class="card-author">By {{ post.author.username }}</p>
+
+            <div class="profile-card-actions">
+                <a href="{% url 'edit_post' post.id %}" class="small-btn">Edit</a>
+                <a href="{% url 'delete_post' post.id %}" class="small-btn danger-btn">Delete</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-center">
+        <p>No blogs.</p>
+    </div>
+    {% endif %}
+</section>
+{% endblock main %}
