@@ -1,0 +1,75 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if post %}Edit Blog{% else %}Create Blog{% endif %}
+{% endblock title %}
+
+{% block navbar %}
+<nav class="navbar">
+    <div class="nav-left">
+        <a href="{% url 'homepage' %}" class="logo">
+            <span class="logo-icon">✦</span>
+            <span class="logo-text">BlogNest</span>
+        </a>
+    </div>
+    <div class="nav-right">
+        <a href="{% url 'posts' %}" class="nav-link">All Posts</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}" class="nav-link">Profile</a>
+            <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="nav-link">Login</a>
+        {% endif %}
+    </div>
+</nav>
+{% endblock navbar %}
+
+{% block main %}
+<section class="page-section">
+    <div class="form-page-header">
+        <h2>{% if post %}Edit Blog Post{% else %}Create New Blog Post{% endif %}</h2>
+        <p class="form-page-subtitle">
+            {% if post %}
+                Update your title and content below.
+            {% else %}
+                Write your title and content to publish a new blog.
+            {% endif %}
+        </p>
+    </div>
+
+    <div class="blog-form-card">
+        <form method="POST" class="blog-form">
+            {% csrf_token %}
+            {{ form.media }}
+
+            <div class="form-group">
+                <label for="id_title" class="form-label">Blog Title</label>
+                <input
+                    type="text"
+                    name="title"
+                    id="id_title"
+                    class="form-input"
+                    placeholder="Enter blog title"
+                    value="{% if form.title.value %}{{ form.title.value }}{% endif %}"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="id_content" class="form-label">Blog Content</label>
+                <div class="editor-wrapper">
+                    {{ form.content }}
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <a href="{% url 'profile' %}" class="secondary-btn">Cancel</a>
+                <button type="submit" class="primary-btn">
+                    {% if post %}Update Blog{% else %}Publish Blog{% endif %}
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock main %}

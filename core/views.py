@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import BlogPost, Comment
+from .forms import BlogPostForm
 
 
 class HomeView(View):
@@ -14,7 +15,57 @@ class HomeView(View):
 
 class ProfileView(LoginRequiredMixin, View):
     def get(self, request: HttpRequest) -> HttpResponse:
-        return render(request, 'profile.html')
+        user_posts = BlogPost.objects.filter(author=request.user)
+        context = {
+            'user_posts': user_posts
+        }
+        return render(request, 'profile.html', context=context)
+    
+
+class CreateBlogPostView(LoginRequiredMixin, View):
+    def get(self, request: HttpRequest) -> HttpResponse:
+        form = BlogPostForm()
+        context = {
+            'form': form,
+        }
+        return render(request, 'create_edit.html', context=context)
+    
+    def post(self, request: HttpRequest) -> HttpResponse:
+        form = BlogPostForm(request.POST)
+
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+
+        return redirect('profile')
+
+
+class EditBlogPostView(LoginRequiredMixin, View):
+    def get(self, request: HttpRequest, id: int) -> HttpResponse:
+        post = get_object_or_404(BlogPost, id=id, author=request.user)
+        form = BlogPostForm(instance=post)
+        context = {
+            'post': post,
+            'form': form,
+        }
+        return render(request, 'create_edit.html', context=context)
+    
+    def post(self, request: HttpRequest, id: int) -> HttpResponse:
+        post = get_object_or_404(BlogPost, id=id, author=request.user)
+        form = BlogPostForm(request.POST, instance=post)
+
+        if form.is_valid():
+            form.save()
+        return redirect('profile')
+    
+    
+
+class DeleteBlogPostView(LoginRequiredMixin, View):
+    def post(self, request: HttpRequest, id: int) -> HttpResponse:
+        post = get_object_or_404(BlogPost, id=id, author=request.user)
+        post.delete()
+        return redirect('profile')
 
 
 class PostsView(View):

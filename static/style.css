@@ -9,6 +9,7 @@ body {
     background: #f8fafc;
     color: #1e293b;
     min-height: 100vh;
+    padding-bottom: 40px;
 }
 
 /* Navbar */
@@ -190,7 +191,7 @@ body {
 /* Grid cards */
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 24px;
 }
 
@@ -201,7 +202,7 @@ body {
     padding: 24px;
     display: flex;
     flex-direction: column;
-    min-height: 280px;
+    min-height: auto;
     box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
 }
 
@@ -215,21 +216,60 @@ body {
     color: #475569;
     line-height: 1.7;
     font-size: 15px;
-    flex-grow: 1;
+    margin-bottom: 16px;
+}
+
+.card-content p {
+    margin: 0;
 }
 
 .card-author {
-    margin-top: 18px;
+    margin-top: 0;
     color: #64748b;
     font-size: 14px;
     font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.card-view-btn {
+    width: fit-content;
+    margin-top: 0;
+    align-self: flex-start;
 }
 
 .profile-card-actions {
     margin-top: 18px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     gap: 12px;
     flex-wrap: wrap;
+}
+
+.profile-card-left,
+.profile-card-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-card-right {
+    margin-left: auto;
+}
+
+.profile-view-btn {
+    margin-top: 0;
+    width: fit-content;
+    align-self: auto;
+}
+
+.delete-form {
+    margin: 0;
+}
+
+.delete-form button {
+    border: none;
+    cursor: pointer;
 }
 
 /* Empty states */
@@ -638,4 +678,281 @@ body {
     .auth-card {
         padding: 24px;
     }
+}
+
+/*Add Edit post*/
+.form-page-header {
+    margin-bottom: 24px;
+}
+
+.form-page-header h2 {
+    font-size: 32px;
+    color: #0f172a;
+    margin-bottom: 8px;
+}
+
+.form-page-subtitle {
+    color: #64748b;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.blog-form-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
+}
+
+.blog-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.form-input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    font-size: 15px;
+    color: #0f172a;
+    outline: none;
+    transition: 0.3s ease;
+    background: #ffffff;
+}
+
+.form-input:focus {
+    border-color: #2563eb;
+}
+
+/* CKEditor wrapper if rendered by Django form */
+.form-group .django-ckeditor-widget,
+.form-group .ck-editor,
+.form-group .ck-editor__editable {
+    width: 100%;
+}
+
+/* Editor outer area */
+.form-group .ck-editor__editable {
+    min-height: 280px;
+}
+
+/* Fallback textarea styling if editor does not load */
+.form-group textarea {
+    width: 100%;
+    min-height: 280px;
+    padding: 14px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    font-size: 15px;
+    color: #0f172a;
+    outline: none;
+    resize: vertical;
+    transition: 0.3s ease;
+    background: #ffffff;
+}
+
+.form-group textarea:focus {
+    border-color: #2563eb;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+}
+
+.primary-btn,
+.secondary-btn {
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    padding: 11px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.primary-btn {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.primary-btn:hover {
+    background: #1d4ed8;
+}
+
+.secondary-btn {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+.secondary-btn:hover {
+    background: #cbd5e1;
+}
+
+@media (max-width: 768px) {
+    .blog-form-card {
+        padding: 22px;
+    }
+
+    .form-page-header h2 {
+        font-size: 26px;
+    }
+
+    .form-actions {
+        justify-content: stretch;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.page-section {
+    width: 90%;
+    max-width: 1200px;
+    margin: 50px auto 80px;
+}
+
+.form-page-header {
+    max-width: 900px;
+    margin: 0 auto 24px;
+}
+
+.form-page-header h2 {
+    font-size: 32px;
+    color: #0f172a;
+    margin-bottom: 8px;
+}
+
+.form-page-subtitle {
+    color: #64748b;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.blog-form-card {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
+}
+
+.blog-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    padding-bottom: 4px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.form-input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    font-size: 15px;
+    color: #0f172a;
+    outline: none;
+    transition: 0.3s ease;
+    background: #ffffff;
+}
+
+.form-input:focus {
+    border-color: #2563eb;
+}
+
+.editor-wrapper textarea {
+    width: 100%;
+    min-height: 280px;
+    padding: 14px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    font-size: 15px;
+    outline: none;
+    resize: vertical;
+}
+
+.editor-wrapper .ck-editor__editable {
+    min-height: 280px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.primary-btn,
+.secondary-btn {
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    padding: 11px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.primary-btn {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.primary-btn:hover {
+    background: #1d4ed8;
+}
+
+.secondary-btn {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+.secondary-btn:hover {
+    background: #cbd5e1;
 }

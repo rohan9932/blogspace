@@ -8,10 +8,11 @@
     <div class="nav-left">
         <a href="{% url 'homepage' %}" class="logo">
             <span class="logo-icon">✦</span>
-            <span class="logo-text">BlogNest</span>
+            <span class="logo-text">BlogSpace</span>
         </a>
     </div>
     <div class="nav-right">
+        <a href="{% url 'posts' %}" class="nav-link">All Posts</a>
         {% if user.is_authenticated %}
             <a href="{% url 'profile' %}" class="nav-link">Profile</a>
             <a href="{% url 'logout' %}" class="nav-link">Logout</a>
@@ -28,6 +29,7 @@
         <h1 class="details-title">{{ post.title }}</h1>
         <p class="details-content">{{ post.content|safe }}</p><br><br>
         <p class="details-author">By {{ post.author.username }}</p>
+        <p class="card-author">{{ post.created_at }}</p>
 
 
         <div class="blog-meta-bar">
