@@ -20,7 +20,7 @@ class BlogPost(BaseModel):
     title = models.CharField(max_length=100)
     content = CKEditor5Field('Content', config_name='extends')
     view_count = models.PositiveBigIntegerField(default=0)
-    liked_users = models.ManyToManyField(User, related_name='liked_posts')
+    liked_users = models.ManyToManyField(User, related_name='liked_users')
 
     def __str__(self) -> str:
         return self.title

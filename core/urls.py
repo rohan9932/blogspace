@@ -5,7 +5,9 @@ from .views import (
     LoginView,
     LogoutView,
     RegisterView,
-    PostsView
+    PostsView,
+    BlogDetailsView,
+    ToggleLikeView
 )
 
 urlpatterns = [
@@ -15,4 +17,6 @@ urlpatterns = [
     path("logout/", LogoutView.as_view(), name='logout'),
     path("profile/", ProfileView.as_view(), name='profile'),
     path("posts/", PostsView.as_view(), name='posts'),
+    path('posts/<int:id>', BlogDetailsView.as_view(), name='blog_details'),
+    path('posts/<int:id>/like/', ToggleLikeView.as_view(), name='toggle_like')
 ]
