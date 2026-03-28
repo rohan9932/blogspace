@@ -7,6 +7,8 @@
 <section class="auth-wrapper">
     <div class="auth-card">
         <h2 class="auth-title">Login</h2>
+        <p class="auth-subtitle">Login to access your account</p>
+        <p class="auth-subtitle" style="color: tomato">{{error}}</p>
 
         <form method="POST" class="auth-form">
             {% csrf_token %}

@@ -85,6 +85,23 @@ body {
     color: #64748b;
 }
 
+.hero-btn {
+    display: inline-block;
+    margin-top: 22px;
+    text-decoration: none;
+    background: #2563eb;
+    color: #ffffff;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.hero-btn:hover {
+    background: #1d4ed8;
+}
+
 /* Common page section */
 .page-section {
     width: 90%;
@@ -340,6 +357,14 @@ body {
     color: #0f172a;
     margin-bottom: 24px;
     text-align: center;
+}
+
+.auth-subtitle {
+    text-align: center;
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 22px;
 }
 
 .auth-form {

@@ -1,4 +1,4 @@
-{% extends "blog/blog.html" %}
+{% extends "base/base.html" %}
 {% load static %}
 
 {% block title %}BlogSpace{% endblock title %}BlogPosts
@@ -26,5 +26,6 @@
 <main class="hero-center">
     <h1 class="hero-title">BlogSpace</h1>
     <p class="hero-subtitle">Your blogs in one place.</p>
+    <a href="{% url 'posts' %}" class="hero-btn">All Posts</a>
 </main>
 {% endblock main %}
